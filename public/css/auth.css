@@ -1,0 +1,187 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #0b0b0b;
+  color: #f5f5dc;
+}
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+}
+
+.auth-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.auth-form-section,
+.auth-branding-section {
+  flex: 1 1 50%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-form-section {
+  background: linear-gradient(135deg, #161616 0%, #0f0f0f 100%);
+  padding: 64px 40px;
+}
+
+.auth-form-container {
+  width: 100%;
+  max-width: 480px;
+}
+
+.auth-header {
+  margin-bottom: 24px;
+}
+
+.auth-title {
+  font-family: "Playfair Display", serif;
+  font-size: 44px;
+  line-height: 1.1;
+  color: #d4af37;
+  margin-bottom: 8px;
+}
+
+.auth-subtitle {
+  color: #cfcfc0;
+  font-size: 15px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #d4af37;
+  margin: 0 0 6px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid rgba(212, 175, 55, 0.25);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+}
+
+.form-input:focus {
+  outline: 0;
+  border-color: #d4af37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
+}
+
+.btn {
+  width: 100%;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #d4af37, #b8941f);
+  color: #121212;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+
+.auth-links {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.auth-links a {
+  color: #d4af37;
+  text-decoration: none;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
+}
+
+.auth-branding-section {
+  background: radial-gradient(1200px 600px at 20% 20%, rgba(212, 175, 55, 0.12), transparent 60%),
+              linear-gradient(135deg, #202020, #111);
+  padding: 64px 40px;
+}
+
+.branding-content {
+  max-width: 560px;
+  text-align: left;
+}
+
+.branding-logo-circle {
+  display: none;
+}
+
+.branding-title {
+  font-family: "Playfair Display", serif;
+  font-size: 56px;
+  color: #d4af37;
+  line-height: 1.05;
+  margin: 0 0 10px;
+}
+
+.branding-subtitle {
+  font-size: 18px;
+  color: #d5d5c5;
+  margin: 0 0 16px;
+}
+
+.branding-description {
+  font-size: 15px;
+  color: #a8a89a;
+  line-height: 1.7;
+  margin: 0 0 22px;
+  max-width: 520px;
+}
+
+.branding-features {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.branding-feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #cfcfc0;
+}
+
+.branding-feature-icon {
+  width: 22px;
+  height: 22px;
+  color: #d4af37;
+  flex: 0 0 22px;
+}
+
+@media (max-width: 1024px) {
+  .auth-container { flex-direction: column; }
+  .auth-form-section,
+  .auth-branding-section { flex: initial; width: 100%; }
+  .auth-form-section { order: 1; padding: 40px 24px; }
+  .auth-branding-section { order: 2; padding: 36px 24px; }
+  .branding-title { font-size: 40px; }
+}
+
