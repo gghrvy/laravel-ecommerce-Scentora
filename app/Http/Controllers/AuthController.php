@@ -18,7 +18,7 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        // Store user info in session for demo purposes
+        
         $request->session()->put('user', [
             'name' => 'Demo User',
             'email' => $request->email
@@ -40,7 +40,7 @@ class AuthController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        // Store user info in session for demo purposes
+        
         $request->session()->put('user', [
             'name' => $request->name,
             'email' => $request->email
@@ -51,7 +51,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        // Stateless logout: clear session without using auth or database
+        
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/login');
