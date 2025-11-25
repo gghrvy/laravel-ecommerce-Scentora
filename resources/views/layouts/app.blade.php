@@ -15,9 +15,9 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            background: #f5f1e8;
             min-height: 100vh;
-            color: #f5f5dc;
+            color: #3d2817;
         }
 
         .container {
@@ -27,9 +27,9 @@
         }
 
         .header {
-            background: rgba(26, 26, 26, 0.95);
+            background: rgba(245, 241, 232, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid rgba(92, 58, 33, 0.2);
             padding: 1rem 0;
             position: sticky;
             top: 0;
@@ -45,9 +45,9 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 3px;
             text-decoration: none;
-            color: #d4af37;
+            color: #5c3a21;
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
             font-weight: 700;
@@ -56,7 +56,7 @@
         .logo-icon {
             width: 40px;
             height: 40px;
-            border: 2px solid #d4af37;
+            border: 2px solid #5c3a21;
             border-radius: 8px;
             position: relative;
             display: flex;
@@ -68,7 +68,7 @@
             content: 'S';
             font-size: 1.5rem;
             font-weight: bold;
-            color: #d4af37;
+            color: #5c3a21;
         }
 
         .nav-links {
@@ -78,7 +78,7 @@
         }
 
         .nav-links a {
-            color: #f5f5dc;
+            color: #5c3a21;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
@@ -86,7 +86,7 @@
         }
 
         .nav-links a:hover {
-            color: #d4af37;
+            color: #c9975a;
         }
 
         .nav-links a::after {
@@ -96,7 +96,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: #d4af37;
+            background: #c9975a;
             transition: width 0.3s ease;
         }
 
@@ -109,11 +109,11 @@
         }
 
         .footer {
-            background: #1a1a1a;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            background: #e8ddd4;
+            border-top: 1px solid rgba(92, 58, 33, 0.2);
             padding: 2rem 0;
             text-align: center;
-            color: #888;
+            color: #8b5a3c;
         }
 
         /* auth styles are provided by public/css/auth.css only */
@@ -137,7 +137,7 @@
         <nav class="nav container">
             <a href="/" class="logo">
                 <div class="logo-icon"></div>
-                Scentora
+                centora
             </a>
             <ul class="nav-links">
                 <li><a href="/">Login</a></li>
@@ -154,7 +154,6 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Scentora. All rights reserved. Luxury fragrances for the discerning.</p>
         </div>
     </footer>
 </body>

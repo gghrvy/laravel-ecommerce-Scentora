@@ -6,8 +6,8 @@
 
 body {
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: #0b0b0b;
-  color: #f5f5dc;
+  background: #f5f1e8;
+  color: #3d2817;
 }
 
 .auth-page {
@@ -31,7 +31,7 @@ body {
 }
 
 .auth-form-section {
-  background: linear-gradient(135deg, #161616 0%, #0f0f0f 100%);
+  background: linear-gradient(135deg, #f5f1e8 0%, #e8ddd4 100%);
   padding: 64px 40px;
 }
 
@@ -48,12 +48,12 @@ body {
   font-family: "Playfair Display", serif;
   font-size: 44px;
   line-height: 1.1;
-  color: #d4af37;
+  color: #5c3a21;
   margin-bottom: 8px;
 }
 
 .auth-subtitle {
-  color: #cfcfc0;
+  color: #8b5a3c;
   font-size: 15px;
 }
 
@@ -66,23 +66,23 @@ body {
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #d4af37;
+  color: #5c3a21;
   margin: 0 0 6px;
 }
 
 .form-input {
   width: 100%;
   padding: 14px 16px;
-  border: 2px solid rgba(212, 175, 55, 0.25);
+  border: 2px solid rgba(92, 58, 33, 0.3);
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.04);
-  color: #fff;
+  background: #ffffff;
+  color: #3d2817;
 }
 
 .form-input:focus {
   outline: 0;
-  border-color: #d4af37;
-  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
+  border-color: #c9975a;
+  box-shadow: 0 0 0 3px rgba(201, 151, 90, 0.15);
 }
 
 .btn {
@@ -97,8 +97,8 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #d4af37, #b8941f);
-  color: #121212;
+  background: linear-gradient(135deg, #c9975a, #b8864a);
+  color: #ffffff;
 }
 
 .btn-primary:hover {
@@ -111,7 +111,7 @@ body {
 }
 
 .auth-links a {
-  color: #d4af37;
+  color: #c9975a;
   text-decoration: none;
 }
 
@@ -120,8 +120,8 @@ body {
 }
 
 .auth-branding-section {
-  background: radial-gradient(1200px 600px at 20% 20%, rgba(212, 175, 55, 0.12), transparent 60%),
-              linear-gradient(135deg, #202020, #111);
+  background: radial-gradient(1200px 600px at 20% 20%, rgba(201, 151, 90, 0.15), transparent 60%),
+              linear-gradient(135deg, #5c3a21, #3d2817);
   padding: 64px 40px;
 }
 
@@ -137,20 +137,20 @@ body {
 .branding-title {
   font-family: "Playfair Display", serif;
   font-size: 56px;
-  color: #d4af37;
+  color: #f5f1e8;
   line-height: 1.05;
   margin: 0 0 10px;
 }
 
 .branding-subtitle {
   font-size: 18px;
-  color: #d5d5c5;
+  color: #e8ddd4;
   margin: 0 0 16px;
 }
 
 .branding-description {
   font-size: 15px;
-  color: #a8a89a;
+  color: #d4c4b0;
   line-height: 1.7;
   margin: 0 0 22px;
   max-width: 520px;
@@ -166,13 +166,13 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #cfcfc0;
+  color: #e8ddd4;
 }
 
 .branding-feature-icon {
   width: 22px;
   height: 22px;
-  color: #d4af37;
+  color: #c9975a;
   flex: 0 0 22px;
 }
 

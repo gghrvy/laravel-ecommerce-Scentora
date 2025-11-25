@@ -24,7 +24,7 @@ class AuthController extends Controller
             'email' => $request->email
         ]);
 
-        return redirect('/register')->with('success', 'Login successful! Welcome back to Scentora!');
+        return redirect('/dashboard')->with('success', 'Login successful! Welcome back to Scentora!');
     }
 
     public function showRegister()
@@ -55,5 +55,11 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/login');
+    }
+
+    public function dashboard(Request $request)
+    {
+        $user = $request->session()->get('user');
+        return view('dashboard', ['user' => $user]);
     }
 }
