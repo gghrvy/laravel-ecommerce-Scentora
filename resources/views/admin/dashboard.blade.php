@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1 class="mb-4">Admin Dashboard</h1>
-    <p>Welcome back, {{ $user->name ?? 'Admin' }}.</p>
+    <p>Welcome back, {{ $user['name'] ?? 'Admin' }}.</p>
 
     <div class="card mt-4">
         <div class="card-body">

@@ -4,14 +4,13 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class EnsureUserIsAdmin
 {
     public function handle(Request $request, Closure $next): Response
     {
-        $user = Auth::user();
+        $user = $request->session()->get('user');
         
         if (!$user) {
             if ($request->expectsJson()) {
@@ -20,7 +19,7 @@ class EnsureUserIsAdmin
             return redirect()->route('login');
         }
         
-        if (!($user->is_admin ?? false)) {
+        if (!($user['is_admin'] ?? false)) {
             if ($request->expectsJson()) {
                 return response()->json(['message' => 'Forbidden'], 403);
             }

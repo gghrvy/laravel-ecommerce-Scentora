@@ -19,10 +19,18 @@ class AuthController extends Controller
         ]);
 
         
+        $email = $request->email;
+        $isAdmin = str_ends_with(strtolower($email), '@admin.com');
+        
         $request->session()->put('user', [
             'name' => 'Demo User',
-            'email' => $request->email
+            'email' => $email,
+            'is_admin' => $isAdmin
         ]);
+
+        if ($isAdmin) {
+            return redirect('/admin/dashboard')->with('success', 'Login successful! Welcome to Admin Dashboard!');
+        }
 
         return redirect('/dashboard')->with('success', 'Login successful! Welcome back to Scentora!');
     }

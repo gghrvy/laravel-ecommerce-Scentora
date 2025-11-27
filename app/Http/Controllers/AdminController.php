@@ -6,22 +6,19 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function __construct()
+    public function index(Request $request)
     {
-        $this->middleware(['auth', 'admin']);
-    }
-
-    public function index()
-    {
+        $user = $request->session()->get('user');
         return view('admin.dashboard', [
-            'user' => auth()->user()
+            'user' => $user
         ]);
     }
 
-    public function settings()
+    public function settings(Request $request)
     {
+        $user = $request->session()->get('user');
         return view('admin.settings', [
-            'user' => auth()->user()
+            'user' => $user
         ]);
     }
 }
