@@ -13,6 +13,12 @@ Route::post('/register', [AuthController::class, 'register'])->middleware('guest
 Route::middleware('auth.user')->group(function () {
     Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::view('/products', 'user.products')->name('products');
+    Route::view('/products/{id}', 'user.product-show')->name('product.show');
+    Route::view('/cart', 'user.cart')->name('cart');
+    Route::view('/orders', 'user.orders')->name('orders');
+    Route::view('/wishlist', 'user.wishlist')->name('wishlist');
+    Route::view('/profile', 'user.profile')->name('profile');
 });
 
 Route::middleware(['auth.user', 'admin'])->group(function () {

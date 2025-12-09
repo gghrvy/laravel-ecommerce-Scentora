@@ -6,6 +6,7 @@
     <title>@yield('title', 'Scentora - Luxury Fragrance Boutique')</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="{{ asset('css/auth.css') }}" rel="stylesheet">
+    @stack('styles')
     <style>
         * {
             margin: 0;
@@ -133,9 +134,16 @@
     </style>
 </head>
 <body>
+    @php
+        $navUser = session('user');
+        $homeUrl = $navUser
+            ? (($navUser['is_admin'] ?? false) ? route('admin.dashboard') : route('dashboard'))
+            : url('/');
+    @endphp
+
     <header class="header">
         <nav class="nav container">
-            <a href="/" class="logo">
+            <a href="{{ $homeUrl }}" class="logo">
                 <div class="logo-icon"></div>
                 centora
             </a>

@@ -21,9 +21,10 @@ class AuthController extends Controller
         
         $email = $request->email;
         $isAdmin = str_ends_with(strtolower($email), '@admin.com');
-        
+        $nameFromEmail = ucfirst(strtok($email, '@')) ?: 'User';
+
         $request->session()->put('user', [
-            'name' => 'Demo User',
+            'name' => $nameFromEmail,
             'email' => $email,
             'is_admin' => $isAdmin
         ]);
@@ -48,13 +49,10 @@ class AuthController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        
-        $request->session()->put('user', [
-            'name' => $request->name,
-            'email' => $request->email
-        ]);
+        // Don't create session here - user should login explicitly after registration
+        // This allows users to go back to register page if needed
 
-        return redirect('/login')->with('success', 'Registration successful! Welcome to Scentora, ' . $request->name . '!');
+        return redirect('/login')->with('success', 'Registration successful! Welcome to Scentora, ' . $request->name . '! Please login to continue.');
     }
 
     public function logout(Request $request)
@@ -68,6 +66,6 @@ class AuthController extends Controller
     public function dashboard(Request $request)
     {
         $user = $request->session()->get('user');
-        return view('dashboard', ['user' => $user]);
+        return view('user.dashboard', ['user' => $user]);
     }
 }
