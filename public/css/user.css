@@ -292,25 +292,6 @@
     width: calc(100% - 96px);
 }
 
-.user-topbar {
-    padding: 20px 28px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    border-bottom: 1px solid rgba(92, 58, 33, 0.1);
-    background: rgba(245, 241, 232, 0.9);
-    position: sticky;
-    top: 0;
-    backdrop-filter: blur(6px);
-    z-index: 10;
-}
-
-.topbar-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    color: #5c3a21;
-}
-
 .user-content {
     padding: 28px;
     flex: 1;

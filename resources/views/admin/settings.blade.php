@@ -1,13 +1,21 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+
+@section('title', 'Settings - Scentora')
+@section('page_title', 'Settings')
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/admin-dashboard.css') }}">
+@endpush
 
 @section('content')
-<div class="container">
-    <h1 class="mb-4">Admin Settings</h1>
-    <p>Manage application configuration and user permissions here.</p>
+<div class="admin-dashboard-page">
 
-    <div class="card mt-4">
-        <div class="card-body">
-            <p class="mb-0">Add your admin controls as needed.</p>
+    <div class="admin-card">
+        <div class="admin-card-header">
+            <h2 class="admin-card-title">Settings</h2>
+        </div>
+        <div class="admin-card-body">
+            <p>Settings configuration will be available here.</p>
         </div>
     </div>
 </div>

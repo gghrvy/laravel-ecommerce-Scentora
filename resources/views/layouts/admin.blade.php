@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Scentora')</title>
+    <title>@yield('title', 'Admin - Scentora')</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="{{ asset('css/user.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
 <body class="user-app-body">
-    <div class="user-app-shell" id="userAppShell">
-        <aside class="user-sidebar" id="userSidebar">
+    <div class="user-app-shell" id="adminAppShell">
+        <aside class="user-sidebar" id="adminSidebar">
             <div class="sidebar-brand">
                 <button type="button" class="brand-link" id="sidebarToggle" aria-label="Toggle navigation">
                     <div class="logo-icon"></div>
@@ -18,28 +18,33 @@
                 </button>
             </div>
             <nav class="sidebar-nav">
-                <a href="{{ route('dashboard') }}" class="sidebar-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                <a href="{{ route('admin.dashboard') }}" class="sidebar-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                     <span class="link-icon">@include('partials.icons.dashboard')</span><span class="link-label">Dashboard</span>
                 </a>
-                <a href="{{ route('products') }}" class="sidebar-link {{ request()->routeIs('products') ? 'active' : '' }}">
+                <a href="{{ route('admin.products') }}" class="sidebar-link {{ request()->routeIs('admin.products*') ? 'active' : '' }}">
                     <span class="link-icon">@include('partials.icons.products')</span><span class="link-label">Products</span>
                 </a>
-                <a href="{{ route('cart') }}" class="sidebar-link {{ request()->routeIs('cart') ? 'active' : '' }}">
-                    <span class="link-icon">@include('partials.icons.cart')</span><span class="link-label">Cart</span>
-                </a>
-                <a href="{{ route('orders') }}" class="sidebar-link {{ request()->routeIs('orders') ? 'active' : '' }}">
+                <a href="{{ route('admin.orders') }}" class="sidebar-link {{ request()->routeIs('admin.orders*') ? 'active' : '' }}">
                     <span class="link-icon">@include('partials.icons.orders')</span><span class="link-label">Orders</span>
                 </a>
-                <a href="{{ route('wishlist') }}" class="sidebar-link {{ request()->routeIs('wishlist') ? 'active' : '' }}">
-                    <span class="link-icon">@include('partials.icons.heart')</span><span class="link-label">Wishlist</span>
+                <a href="{{ route('admin.users') }}" class="sidebar-link {{ request()->routeIs('admin.users*') ? 'active' : '' }}">
+                    <span class="link-icon">@include('partials.icons.user')</span><span class="link-label">Users</span>
+                </a>
+                <a href="{{ route('admin.settings') }}" class="sidebar-link {{ request()->routeIs('admin.settings') ? 'active' : '' }}">
+                    <span class="link-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24"/>
+                        </svg>
+                    </span><span class="link-label">Settings</span>
                 </a>
             </nav>
             <div class="sidebar-footer">
-                <a href="{{ route('profile') }}" class="sidebar-user-link">
+                <a href="{{ route('dashboard') }}" class="sidebar-user-link">
                     <div class="sidebar-user">
                         <span class="sidebar-user-icon">@include('partials.icons.user')</span>
                         <div>
-                            <div class="sidebar-user-name">{{ session('user.name') ?? (session('user')['name'] ?? 'Guest') }}</div>
+                            <div class="sidebar-user-name">{{ session('user.name') ?? (session('user')['name'] ?? 'Admin') }}</div>
                             <div class="sidebar-user-email">{{ session('user.email') ?? (session('user')['email'] ?? '') }}</div>
                         </div>
                     </div>
@@ -63,9 +68,9 @@
 
     <script>
         (function() {
-            const shell = document.getElementById('userAppShell');
+            const shell = document.getElementById('adminAppShell');
             const toggle = document.getElementById('sidebarToggle');
-            const storageKey = 'scentora_sidebar_collapsed';
+            const storageKey = 'scentora_admin_sidebar_collapsed';
 
             const applyState = (collapsed) => {
                 if (collapsed) {
