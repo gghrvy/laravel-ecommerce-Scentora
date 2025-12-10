@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -18,18 +20,20 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        
-        $email = $request->email;
-        $isAdmin = str_ends_with(strtolower($email), '@admin.com');
-        $nameFromEmail = ucfirst(strtok($email, '@')) ?: 'User';
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return back()->withErrors(['email' => 'Invalid credentials.'])->withInput();
+        }
 
         $request->session()->put('user', [
-            'name' => $nameFromEmail,
-            'email' => $email,
-            'is_admin' => $isAdmin
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'is_admin' => $user->is_admin
         ]);
 
-        if ($isAdmin) {
+        if ($user->is_admin) {
             return redirect('/admin/dashboard')->with('success', 'Login successful! Welcome to Admin Dashboard!');
         }
 
@@ -45,12 +49,18 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        // Don't create session here - user should login explicitly after registration
-        // This allows users to go back to register page if needed
+        $isAdmin = str_ends_with(strtolower($request->email), '@admin.com');
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'is_admin' => $isAdmin,
+        ]);
 
         return redirect('/login')->with('success', 'Registration successful! Welcome to Scentora, ' . $request->name . '! Please login to continue.');
     }

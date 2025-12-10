@@ -4,46 +4,14 @@
 @section('page_title', 'Shopping Cart')
 
 @section('content')
-<div class="cart-layout">
-    <div class="cart-items">
-        @for ($i = 1; $i <= 2; $i++)
-            <div class="cart-item">
-                <div class="cart-thumb"></div>
-                <div class="cart-info">
-                    <h3 class="cart-name">Eau de Luxe {{ $i }}</h3>
-                    <p class="cart-notes">50ml • Eau de Parfum</p>
-                    <div class="cart-controls">
-                        <div class="qty">
-                            <button class="qty-btn">-</button>
-                            <input type="number" value="1">
-                            <button class="qty-btn">+</button>
-                        </div>
-                        <button class="link">Move to Wishlist</button>
-                    </div>
-                </div>
-                <div class="cart-price">
-                    <span class="price">$129.00</span>
-                    <button class="link">Remove</button>
-                </div>
-            </div>
-        @endfor
-    </div>
-    <div class="cart-summary">
-        <h3>Order Summary</h3>
-        <div class="summary-row">
-            <span>Subtotal</span>
-            <span>$258.00</span>
-        </div>
-        <div class="summary-row">
-            <span>Shipping</span>
-            <span>Free</span>
-        </div>
-        <div class="summary-row total">
-            <span>Total</span>
-            <span>$258.00</span>
-        </div>
-        <button class="btn primary w-100">Checkout</button>
-        <button class="btn ghost w-100">Continue Shopping</button>
+<div class="empty-state">
+    <div class="empty-state-content">
+        <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 2H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-4M9 2v4h6V2M9 2h6"/>
+        </svg>
+        <h3 class="empty-title">Your Cart is Empty</h3>
+        <p class="empty-text">Add products to your cart to get started.</p>
+        <a href="{{ route('products') }}" class="btn primary">Browse Products</a>
     </div>
 </div>
 @endsection

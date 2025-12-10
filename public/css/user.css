@@ -87,6 +87,20 @@
     overflow: hidden;
 }
 
+.user-app-shell.is-collapsed .brand-link {
+    justify-content: center;
+    padding: 8px;
+    width: 46px;
+    height: 46px;
+    gap: 0;
+}
+
+.user-app-shell.is-collapsed .logo-icon {
+    width: 24px;
+    height: 24px;
+    margin: 0 auto;
+}
+
 .sidebar-user {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -140,10 +154,8 @@
 }
 
 .link-icon {
-    width: 26px;
-    height: 26px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.08);
+    width: 24px;
+    height: 24px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -177,6 +189,7 @@
     align-items: center;
     justify-content: center;
     color: #f5e9dc;
+    flex-shrink: 0;
 }
 
 .user-app-shell.is-collapsed .sidebar-link {
@@ -204,17 +217,22 @@
 }
 
 .user-app-shell.is-collapsed .sidebar-user-icon {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.2);
+    width: 24px;
+    height: 24px;
+}
+
+.user-app-shell.is-collapsed .sidebar-logout {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .user-app-shell.is-collapsed .logout-btn {
-    padding: 0;
+    padding: 10px;
     width: 46px;
     height: 46px;
     border-radius: 10px;
+    justify-content: center;
 }
 
 .user-app-shell.is-collapsed .logout-btn .logout-label {
@@ -230,11 +248,11 @@
     width: 100%;
     padding: 9px 10px;
     border-radius: 10px;
-    background: #b07a3c;
-    color: #fff;
+    background: transparent;
+    color: #f5e9dc;
     border: none;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 500;
     transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
@@ -246,12 +264,13 @@
 }
 
 .logout-btn:hover {
-    background: #c9975a;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffd7a0;
 }
 
 .logout-btn svg {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     flex-shrink: 0;
 }
 
@@ -701,10 +720,33 @@
     gap: 8px;
 }
 
+.dashboard-welcome {
+    margin-bottom: 32px;
+    padding: 32px 0;
+}
+
+.welcome-content {
+    text-align: center;
+}
+
+.welcome-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: #5c3a21;
+    margin: 0 0 12px 0;
+    line-height: 1.2;
+}
+
+.welcome-subtitle {
+    font-size: 16px;
+    color: #8b5a3c;
+    margin: 0;
+}
+
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 16px;
+    gap: 24px;
 }
 
 .dashboard-grid.wide {
@@ -715,8 +757,15 @@
     background: linear-gradient(135deg, #ffffff 0%, #f5f1e8 100%);
     border: 1px solid rgba(92, 58, 33, 0.2);
     border-radius: 14px;
-    padding: 16px;
+    padding: 24px;
     box-shadow: 0 2px 10px rgba(92, 58, 33, 0.08);
+    transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+    border-color: rgba(201, 151, 90, 0.4);
+    box-shadow: 0 8px 24px rgba(201, 151, 90, 0.15);
+    transform: translateY(-2px);
 }
 
 .dashboard-card-header {
@@ -736,8 +785,20 @@
 
 .dashboard-card-title {
     margin: 0;
-    font-size: 18px;
+    font-size: 20px;
+    font-family: 'Playfair Display', serif;
     color: #5c3a21;
+}
+
+.dashboard-card-body {
+    color: #3d2817;
+}
+
+.dashboard-card-text {
+    font-size: 15px;
+    color: #8b5a3c;
+    margin-bottom: 16px;
+    line-height: 1.5;
 }
 
 .snapshot-grid {
@@ -1068,5 +1129,44 @@
     .user-content {
         padding: 18px;
     }
+}
+
+.empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    padding: 60px 20px;
+}
+
+.empty-state-content {
+    text-align: center;
+    max-width: 400px;
+}
+
+.empty-icon {
+    width: 80px;
+    height: 80px;
+    color: #c9975a;
+    margin: 0 auto 24px;
+    opacity: 0.6;
+}
+
+.empty-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #5c3a21;
+    margin: 0 0 12px 0;
+}
+
+.empty-text {
+    font-size: 16px;
+    color: #8b5a3c;
+    margin: 0 0 24px 0;
+    line-height: 1.5;
+}
+
+.empty-state-content .btn {
+    margin-top: 8px;
 }
 

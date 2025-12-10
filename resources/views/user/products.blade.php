@@ -27,24 +27,15 @@
     </div>
 </div>
 
-<div class="product-grid">
-    @for ($i = 1; $i <= 8; $i++)
-        <div class="product-card">
-            <div class="product-image"></div>
-            <div class="product-info">
-                <h3 class="product-name">Eau de Luxe {{ $i }}</h3>
-                <p class="product-notes">Notes: Bergamot, Cedarwood, Amber</p>
-                <div class="product-meta">
-                    <span class="price">$129.00</span>
-                    <span class="badge">50ml</span>
-                </div>
-            </div>
-            <div class="product-actions">
-                <a href="{{ route('product.show', ['id' => $i]) }}" class="btn ghost">View</a>
-                <button class="btn primary">Add to Cart</button>
-            </div>
-        </div>
-    @endfor
+<div class="empty-state">
+    <div class="empty-state-content">
+        <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 16V8A2 2 0 0 0 19 6H5A2 2 0 0 0 3 8V16A2 2 0 0 0 5 18H19A2 2 0 0 0 21 16Z"/>
+            <path d="M3 10h18"/>
+        </svg>
+        <h3 class="empty-title">No Products Available</h3>
+        <p class="empty-text">Products will appear here once they are added to the catalog.</p>
+    </div>
 </div>
 @endsection
 

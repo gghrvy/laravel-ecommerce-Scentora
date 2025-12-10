@@ -4,40 +4,17 @@
 @section('page_title', 'Orders')
 
 @section('content')
-<div class="orders-list">
-    @for ($i = 1; $i <= 4; $i++)
-        <div class="order-card">
-            <div class="order-top">
-                <div>
-                    <div class="order-id">Order #SC-2024-0{{ $i }}</div>
-                    <div class="order-date">Placed on Nov {{ 10 + $i }}, 2024</div>
-                </div>
-                <div class="order-status {{ $i % 2 === 0 ? 'shipped' : 'processing' }}">
-                    {{ $i % 2 === 0 ? 'Shipped' : 'Processing' }}
-                </div>
-            </div>
-            <div class="order-items">
-                <div class="order-item-line">
-                    <span>Eau de Luxe</span>
-                    <span>1 x 50ml</span>
-                </div>
-                <div class="order-item-line">
-                    <span>Amber Noire</span>
-                    <span>1 x 50ml</span>
-                </div>
-            </div>
-            <div class="order-bottom">
-                <div class="order-total">
-                    <span>Total</span>
-                    <strong>$258.00</strong>
-                </div>
-                <div class="order-actions">
-                    <button class="btn ghost">View Details</button>
-                    <button class="btn primary">Track</button>
-                </div>
-            </div>
-        </div>
-    @endfor
+<div class="empty-state">
+    <div class="empty-state-content">
+        <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+            <path d="M2 17L12 22L22 17"/>
+            <path d="M2 12L12 17L22 12"/>
+        </svg>
+        <h3 class="empty-title">No Orders Yet</h3>
+        <p class="empty-text">Your order history will appear here once you place an order.</p>
+        <a href="{{ route('products') }}" class="btn primary">Browse Products</a>
+    </div>
 </div>
 @endsection
 

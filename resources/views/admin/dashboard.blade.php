@@ -34,7 +34,7 @@
                     </svg>
                 </div>
                 <div class="stat-content">
-                    <h3 class="stat-value">1,234</h3>
+                    <h3 class="stat-value">-</h3>
                     <p class="stat-label">Total Users</p>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                     </svg>
                 </div>
                 <div class="stat-content">
-                    <h3 class="stat-value">456</h3>
+                    <h3 class="stat-value">-</h3>
                     <p class="stat-label">Total Orders</p>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                     </svg>
                 </div>
                 <div class="stat-content">
-                    <h3 class="stat-value">89</h3>
+                    <h3 class="stat-value">-</h3>
                     <p class="stat-label">Products</p>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                     </svg>
                 </div>
                 <div class="stat-content">
-                    <h3 class="stat-value">$24,567</h3>
+                    <h3 class="stat-value">-</h3>
                     <p class="stat-label">Revenue</p>
                 </div>
             </div>
