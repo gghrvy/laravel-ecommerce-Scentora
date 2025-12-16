@@ -30,7 +30,13 @@ class ProductController extends Controller
         // Sort
         $sortBy = $request->get('sort', 'created_at');
         $sortOrder = $request->get('order', 'desc');
-        $query->orderBy($sortBy, $sortOrder);
+        
+        // Handle sorting
+        if ($sortBy === 'price') {
+            $query->orderBy('price', $sortOrder);
+        } else {
+            $query->orderBy($sortBy, $sortOrder);
+        }
 
         $products = $query->paginate(12);
 

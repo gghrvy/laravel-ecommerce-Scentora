@@ -39,20 +39,30 @@ class CartController extends Controller
 
         $request->validate([
             'product_id' => 'required|exists:products,id',
-            'quantity' => 'integer|min:1|max:10',
+            'quantity' => 'nullable|integer|min:1|max:10',
         ]);
 
         $product = Product::findOrFail($request->product_id);
         
-        $cartItem = Cart::updateOrCreate(
-            [
+        $quantity = $request->quantity ? (int)$request->quantity : 1;
+        
+        // Check if item already exists in cart
+        $existingCartItem = Cart::where('user_id', $userId)
+            ->where('product_id', $request->product_id)
+            ->first();
+        
+        if ($existingCartItem) {
+            // Update quantity if item exists
+            $newQuantity = min($existingCartItem->quantity + $quantity, 10);
+            $existingCartItem->update(['quantity' => $newQuantity]);
+        } else {
+            // Create new cart item
+            Cart::create([
                 'user_id' => $userId,
                 'product_id' => $request->product_id,
-            ],
-            [
-                'quantity' => $request->quantity ?? 1,
-            ]
-        );
+                'quantity' => $quantity,
+            ]);
+        }
 
         return back()->with('success', 'Product added to cart!');
     }

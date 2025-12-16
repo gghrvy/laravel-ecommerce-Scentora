@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -97,7 +98,18 @@ class AdminController extends Controller
             'best_for' => 'nullable|string',
             'is_featured' => 'boolean',
             'is_active' => 'boolean',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('products', 'public');
+            $validated['image'] = $imagePath;
+        }
+
+        // Set defaults
+        $validated['is_active'] = true;
+        $validated['is_featured'] = false;
 
         Product::create($validated);
         return redirect()->route('admin.products')->with('success', 'Product created successfully!');
@@ -124,7 +136,19 @@ class AdminController extends Controller
             'best_for' => 'nullable|string',
             'is_featured' => 'boolean',
             'is_active' => 'boolean',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($product->image && Storage::disk('public')->exists($product->image)) {
+                Storage::disk('public')->delete($product->image);
+            }
+            // Store new image
+            $imagePath = $request->file('image')->store('products', 'public');
+            $validated['image'] = $imagePath;
+        }
 
         $product->update($validated);
         return redirect()->route('admin.products')->with('success', 'Product updated successfully!');
@@ -133,6 +157,12 @@ class AdminController extends Controller
     public function destroyProduct($id)
     {
         $product = Product::findOrFail($id);
+        
+        // Delete associated image if exists
+        if ($product->image && Storage::disk('public')->exists($product->image)) {
+            Storage::disk('public')->delete($product->image);
+        }
+        
         $product->delete();
         return redirect()->route('admin.products')->with('success', 'Product deleted successfully!');
     }

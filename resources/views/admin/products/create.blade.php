@@ -14,7 +14,7 @@
     </div>
 
         <div class="admin-form-container">
-            <form method="POST" action="{{ route('admin.products.store') }}" class="admin-form">
+            <form method="POST" action="{{ route('admin.products.store') }}" class="admin-form" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group">
@@ -27,6 +27,13 @@
                     <label for="description">Description</label>
                     <textarea id="description" name="description" rows="4" class="form-control">{{ old('description') }}</textarea>
                     @error('description')<span class="error">{{ $message }}</span>@enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Product Image</label>
+                    <input type="file" id="image" name="image" accept="image/jpeg,image/png,image/jpg,image/gif,image/webp" class="form-control">
+                    <small style="color: #8b5a3c; font-size: 12px;">Accepted formats: JPEG, PNG, JPG, GIF, WEBP (Max: 2MB)</small>
+                    @error('image')<span class="error">{{ $message }}</span>@enderror
                 </div>
 
                 <div class="form-row">
@@ -79,21 +86,6 @@
                         <option value="All Season" {{ old('best_for') == 'All Season' ? 'selected' : '' }}>All Season</option>
                     </select>
                     @error('best_for')<span class="error">{{ $message }}</span>@enderror
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>
-                            <input type="checkbox" name="is_featured" value="1" {{ old('is_featured') ? 'checked' : '' }}>
-                            Featured Product
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            <input type="checkbox" name="is_active" value="1" {{ old('is_active', true) ? 'checked' : '' }}>
-                            Active
-                        </label>
-                    </div>
                 </div>
 
                 <div class="form-actions">

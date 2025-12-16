@@ -14,7 +14,7 @@
     </div>
 
         <div class="admin-form-container">
-            <form method="POST" action="{{ route('admin.products.update', $product->id) }}" class="admin-form">
+            <form method="POST" action="{{ route('admin.products.update', $product->id) }}" class="admin-form" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -28,6 +28,19 @@
                     <label for="description">Description</label>
                     <textarea id="description" name="description" rows="4" class="form-control">{{ old('description', $product->description) }}</textarea>
                     @error('description')<span class="error">{{ $message }}</span>@enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Product Image</label>
+                    @if($product->image)
+                        <div style="margin-bottom: 10px;">
+                            <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" style="max-width: 200px; max-height: 200px; border-radius: 8px; border: 1px solid #ddd;">
+                            <p style="font-size: 12px; color: #666; margin-top: 5px;">Current image</p>
+                        </div>
+                    @endif
+                    <input type="file" id="image" name="image" accept="image/jpeg,image/png,image/jpg,image/gif,image/webp" class="form-control">
+                    <small style="color: #8b5a3c; font-size: 12px;">Accepted formats: JPEG, PNG, JPG, GIF, WEBP (Max: 2MB). Leave empty to keep current image.</small>
+                    @error('image')<span class="error">{{ $message }}</span>@enderror
                 </div>
 
                 <div class="form-row">
@@ -80,21 +93,6 @@
                         <option value="All Season" {{ old('best_for', $product->best_for) == 'All Season' ? 'selected' : '' }}>All Season</option>
                     </select>
                     @error('best_for')<span class="error">{{ $message }}</span>@enderror
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>
-                            <input type="checkbox" name="is_featured" value="1" {{ old('is_featured', $product->is_featured) ? 'checked' : '' }}>
-                            Featured Product
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            <input type="checkbox" name="is_active" value="1" {{ old('is_active', $product->is_active) ? 'checked' : '' }}>
-                            Active
-                        </label>
-                    </div>
                 </div>
 
                 <div class="form-actions">
