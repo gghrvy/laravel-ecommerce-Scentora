@@ -9,9 +9,6 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $userId = $request->session()->get('user.id');
@@ -27,9 +24,6 @@ class OrderController extends Controller
         return view('user.orders', ['orders' => $orders]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $userId = $request->session()->get('user.id');
@@ -67,15 +61,11 @@ class OrderController extends Controller
             ]);
         }
 
-        // Clear cart
         Cart::where('user_id', $userId)->delete();
 
         return redirect()->route('orders')->with('success', 'Order placed successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id, Request $request)
     {
         $userId = $request->session()->get('user.id');

@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
-    // Dashboard
     public function index(Request $request)
     {
         $user = $request->session()->get('user');
@@ -25,10 +24,8 @@ class AdminController extends Controller
             'pending_orders' => Order::where('status', 'pending')->count(),
         ];
 
-        // Recent Products (last 5)
         $recentProducts = Product::orderBy('created_at', 'desc')->limit(5)->get();
 
-        // Most Bought Products
         $mostBought = OrderItem::selectRaw('product_id, SUM(quantity) as total_quantity')
             ->groupBy('product_id')
             ->orderBy('total_quantity', 'desc')
@@ -36,13 +33,11 @@ class AdminController extends Controller
             ->with('product')
             ->get();
 
-        // Recent Orders (last 5)
         $recentOrders = Order::with('user')
             ->orderBy('created_at', 'desc')
             ->limit(5)
             ->get();
 
-        // Pending Orders
         $pendingOrders = Order::with('user')
             ->where('status', 'pending')
             ->orderBy('created_at', 'desc')
@@ -67,7 +62,6 @@ class AdminController extends Controller
         ]);
     }
 
-    // Product Management
     public function products(Request $request)
     {
         $query = Product::query();
@@ -101,13 +95,11 @@ class AdminController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
-        // Handle image upload
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('products', 'public');
             $validated['image'] = $imagePath;
         }
 
-        // Set defaults
         $validated['is_active'] = true;
         $validated['is_featured'] = false;
 
@@ -139,13 +131,10 @@ class AdminController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
-        // Handle image upload
         if ($request->hasFile('image')) {
-            // Delete old image if exists
             if ($product->image && Storage::disk('public')->exists($product->image)) {
                 Storage::disk('public')->delete($product->image);
             }
-            // Store new image
             $imagePath = $request->file('image')->store('products', 'public');
             $validated['image'] = $imagePath;
         }
@@ -158,7 +147,6 @@ class AdminController extends Controller
     {
         $product = Product::findOrFail($id);
         
-        // Delete associated image if exists
         if ($product->image && Storage::disk('public')->exists($product->image)) {
             Storage::disk('public')->delete($product->image);
         }
@@ -167,7 +155,6 @@ class AdminController extends Controller
         return redirect()->route('admin.products')->with('success', 'Product deleted successfully!');
     }
 
-    // Order Management
     public function orders(Request $request)
     {
         $query = Order::with('user', 'items.product');
@@ -198,7 +185,6 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Order status updated successfully!');
     }
 
-    // User Management
     public function users(Request $request)
     {
         $query = User::query();
@@ -265,7 +251,6 @@ class AdminController extends Controller
     {
         $user = User::findOrFail($id);
         
-        // Prevent deleting yourself
         $currentUserId = request()->session()->get('user.id');
         if ($user->id == $currentUserId) {
             return redirect()->back()->with('error', 'You cannot delete your own account!');
