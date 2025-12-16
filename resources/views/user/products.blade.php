@@ -8,7 +8,8 @@
     .products-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 32px;
+        column-gap: 32px;
+        row-gap: 48px;
         margin-top: 48px;
         padding-bottom: 60px;
     }
@@ -255,7 +256,7 @@
     </div>
 </div>
 
-@if($products->count() > 0)
+    @if($products && $products->count() > 0)
     <div class="products-grid">
         @foreach($products as $product)
             <div class="product-card" onclick="window.location.href='{{ route('product.show', $product->id) }}'">
@@ -299,10 +300,6 @@
                 </div>
             </div>
         @endforeach
-    </div>
-
-    <div style="margin-top: 40px; display: flex; justify-content: center;">
-        {{ $products->appends(request()->query())->links() }}
     </div>
 @else
     <div class="empty-state">

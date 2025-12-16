@@ -31,7 +31,7 @@ class ProductController extends Controller
             $query->orderBy($sortBy, $sortOrder);
         }
 
-        $products = $query->paginate(12);
+        $products = $query->get();
 
         return view('user.products', compact('products'));
     }
