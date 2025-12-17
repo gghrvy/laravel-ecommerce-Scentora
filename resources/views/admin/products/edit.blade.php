@@ -62,27 +62,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="category">Olfactory Group</label>
-                    <select id="category" name="category" class="form-control">
-                        <option value="">Select Olfactory Group</option>
-                        <option value="Woody" {{ old('category', $product->category) == 'Woody' ? 'selected' : '' }}>Woody</option>
-                        <option value="Floral" {{ old('category', $product->category) == 'Floral' ? 'selected' : '' }}>Floral</option>
-                        <option value="Fresh" {{ old('category', $product->category) == 'Fresh' ? 'selected' : '' }}>Fresh</option>
-                        <option value="Oriental" {{ old('category', $product->category) == 'Oriental' ? 'selected' : '' }}>Oriental</option>
-                        <option value="Citrus" {{ old('category', $product->category) == 'Citrus' ? 'selected' : '' }}>Citrus</option>
-                        <option value="Spicy" {{ old('category', $product->category) == 'Spicy' ? 'selected' : '' }}>Spicy</option>
-                    </select>
-                    @error('category')<span class="error">{{ $message }}</span>@enderror
-                </div>
-
-                <div class="form-group">
-                    <label for="top_notes">Aromas / Notes</label>
-                    <input type="text" id="top_notes" name="top_notes" value="{{ old('top_notes', $product->top_notes) }}" placeholder="e.g., Caramel, Vanilla, Sandalwood" class="form-control">
-                    <small style="color: #8b5a3c; font-size: 12px;">Separate multiple aromas with commas</small>
-                    @error('top_notes')<span class="error">{{ $message }}</span>@enderror
-                </div>
-
-                <div class="form-group">
                     <label for="best_for">Season</label>
                     <select id="best_for" name="best_for" class="form-control">
                         <option value="">Select Season</option>
@@ -95,6 +74,27 @@
                     @error('best_for')<span class="error">{{ $message }}</span>@enderror
                 </div>
 
+                <div class="form-group">
+                    <label for="category">Olfactory Group</label>
+                    <select id="category" name="category" class="form-control">
+                        <option value="">Select Olfactory Group</option>
+                        <option value="Woody" data-seasons="Fall,All Season" {{ old('category', $product->category) == 'Woody' ? 'selected' : '' }}>Woody</option>
+                        <option value="Floral" data-seasons="Spring,All Season" {{ old('category', $product->category) == 'Floral' ? 'selected' : '' }}>Floral</option>
+                        <option value="Fresh" data-seasons="Spring,Summer,All Season" {{ old('category', $product->category) == 'Fresh' ? 'selected' : '' }}>Fresh</option>
+                        <option value="Oriental" data-seasons="Fall,All Season" {{ old('category', $product->category) == 'Oriental' ? 'selected' : '' }}>Oriental</option>
+                        <option value="Citrus" data-seasons="Winter,Summer,All Season" {{ old('category', $product->category) == 'Citrus' ? 'selected' : '' }}>Citrus</option>
+                        <option value="Spicy" data-seasons="Winter,All Season" {{ old('category', $product->category) == 'Spicy' ? 'selected' : '' }}>Spicy</option>
+                    </select>
+                    @error('category')<span class="error">{{ $message }}</span>@enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="top_notes">Aromas / Notes</label>
+                    <input type="text" id="top_notes" name="top_notes" value="{{ old('top_notes', $product->top_notes) }}" placeholder="e.g., Caramel, Vanilla, Sandalwood" class="form-control">
+                    <small style="color: #8b5a3c; font-size: 12px;">Separate multiple aromas with commas</small>
+                    @error('top_notes')<span class="error">{{ $message }}</span>@enderror
+                </div>
+
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">Update Product</button>
                     <a href="{{ route('admin.products') }}" class="btn btn-secondary">Cancel</a>
@@ -102,5 +102,63 @@
             </form>
         </div>
 </div>
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const seasonSelect = document.getElementById('best_for');
+    const categorySelect = document.getElementById('category');
+    const allCategoryOptions = Array.from(categorySelect.querySelectorAll('option[data-seasons]'));
+    
+   
+    const initialCategory = categorySelect.value;
+    
+    function filterCategoriesBySeason() {
+        const selectedSeason = seasonSelect.value;
+        
+        
+        const currentSelected = categorySelect.value;
+        const currentOption = categorySelect.querySelector(`option[value="${currentSelected}"]`);
+        const isCurrentValid = !currentSelected || selectedSeason === '' || selectedSeason === 'All Season' || 
+                              (currentOption && currentOption.dataset.seasons && 
+                               currentOption.dataset.seasons.split(',').includes(selectedSeason));
+        
+        
+        allCategoryOptions.forEach(option => {
+            if (selectedSeason === '' || selectedSeason === 'All Season') {
+                
+                option.style.display = '';
+            } else {
+                
+                const allowedSeasons = option.dataset.seasons ? option.dataset.seasons.split(',').map(s => s.trim()) : [];
+                if (allowedSeasons.includes(selectedSeason)) {
+                    option.style.display = '';
+                } else {
+                    option.style.display = 'none';
+                }
+            }
+        });
+        
+      
+        if (!isCurrentValid && selectedSeason !== '') {
+            categorySelect.value = '';
+        }
+        
+       
+        if (selectedSeason === 'All Season' && initialCategory && categorySelect.querySelector(`option[value="${initialCategory}"]`)) {
+            categorySelect.value = initialCategory;
+        }
+    }
+    
+   
+    if (seasonSelect.value) {
+        filterCategoriesBySeason();
+    }
+    
+ 
+    seasonSelect.addEventListener('change', filterCategoriesBySeason);
+});
+</script>
+@endpush
 @endsection
 
